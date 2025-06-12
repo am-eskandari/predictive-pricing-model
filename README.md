@@ -41,27 +41,41 @@ The project follows a structured data science workflow:
 ```
 predictive-pricing-model/
 ├── data/                      # Data directory
-│   ├── squamish-parcels.csv   # Input data
+│   ├── squamish-parcels.csv   # Raw input data
+│   ├── cleaned-squamish-parcels.csv  # Preprocessed data
 │   └── mystery-parcels.csv    # Test data
 ├── models/                    # Saved models
-├── .env                       # Environment variables
-├── data_preprocessing.py      # Data preprocessing script
-├── model_training.py          # Model training script
-├── make_predictions.py        # Prediction script
-├── main.py                    # Main script to run the pipeline
-├── requirements.txt           # Project dependencies
-└── README.md                  # Project documentation
+│   └── squamish-pipeline.pkl  # Trained model
+├── notebooks/                 # Jupyter notebooks
+│   ├── preprocessing.ipynb    # Original preprocessing notebook
+│   ├── model_training.ipynb   # Original model training notebook
+│   └── testing.ipynb         # Original testing notebook
+├── src/                      # Source code
+│   ├── data_preprocessing.py  # Data preprocessing script
+│   ├── model_training.py     # Model training script
+│   ├── make_predictions.py   # Prediction script
+│   └── main.py              # Main pipeline script
+├── .env                      # Environment variables (not in repo)
+├── .env.example             # Example environment file
+├── requirements.txt         # Project dependencies
+├── setup.ps1               # Setup script for Windows
+└── README.md              # Project documentation
 ```
 
 ## How to Use
 
 1. **Setup**:
+   ```powershell
+   # Run the setup script (Windows)
+   .\setup.ps1
    ```
-   pip install -r requirements.txt
-   ```
+   This will:
+   - Create necessary directories
+   - Set up the environment file
+   - Install required packages
 
 2. **Configure Environment**:
-   Create a `.env` file with your local file paths:
+   The setup script will create a `.env` file with default paths. Update them if needed:
    ```
    DATA_PATH=./data
    MODEL_PATH=./models
@@ -70,19 +84,19 @@ predictive-pricing-model/
    ```
 
 3. **Run the Pipeline**:
-   ```
+   ```bash
    # Run the entire pipeline
-   python main.py --all
+   python src/main.py --all
    
    # Or run individual steps
-   python main.py --preprocess
-   python main.py --train
-   python main.py --predict
+   python src/main.py --preprocess
+   python src/main.py --train
+   python src/main.py --predict
    ```
 
 4. **Custom Paths**:
-   ```
-   python main.py --all --input-file path/to/input.csv --output-file path/to/output.csv
+   ```bash
+   python src/main.py --all --input-file path/to/input.csv --output-file path/to/output.csv
    ```
 
 ## Results
@@ -95,4 +109,8 @@ The model achieves strong predictive performance on Squamish housing data, with 
 - Add time-series analysis for price trends
 - Develop a web interface for easy predictions
 - Expand the model to other regions in British Columbia
+
+## Author
+
+[am-eskandari](https://github.com/am-eskandari)
 

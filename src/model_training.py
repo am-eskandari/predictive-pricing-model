@@ -8,8 +8,7 @@ This script builds and trains a machine learning model to predict housing prices
 in Squamish, BC. It uses the PyCaret library to automate the ML workflow including
 feature selection, model comparison, hyperparameter tuning, and model evaluation.
 
-Author: [Your Name]
-Date: [Current Date]
+Author: am-eskandari
 """
 
 import os

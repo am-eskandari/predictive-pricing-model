@@ -8,8 +8,7 @@ This script loads a trained model and makes predictions on new data.
 It can be used to predict housing prices for new properties or for
 properties with missing assessed values.
 
-Author: [Your Name]
-Date: [Current Date]
+Author: am-eskandari
 """
 
 import os

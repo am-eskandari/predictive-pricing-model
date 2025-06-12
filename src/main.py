@@ -9,8 +9,7 @@ This script orchestrates the entire pipeline for the Squamish housing price pred
 2. Model training
 3. Making predictions
 
-Author: [Your Name]
-Date: [Current Date]
+Author: am-eskandari
 """
 
 import os

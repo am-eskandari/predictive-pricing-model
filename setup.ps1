@@ -1,14 +1,12 @@
 # PowerShell script for setting up the Squamish Housing Price Prediction project
 
 # Create directories if they don't exist
-if (-not (Test-Path -Path ".\data")) {
-    New-Item -ItemType Directory -Path ".\data"
-    Write-Host "Created data directory"
-}
-
-if (-not (Test-Path -Path ".\models")) {
-    New-Item -ItemType Directory -Path ".\models"
-    Write-Host "Created models directory"
+$directories = @("data", "models", "src", "notebooks")
+foreach ($dir in $directories) {
+    if (-not (Test-Path -Path ".\$dir")) {
+        New-Item -ItemType Directory -Path ".\$dir"
+        Write-Host "Created $dir directory"
+    }
 }
 
 # Create .env file if it doesn't exist
@@ -39,4 +37,4 @@ Write-Host "Please place your data files in the 'data' directory:"
 Write-Host "  - squamish-parcels.csv (main dataset)"
 Write-Host "  - mystery-parcels.csv (test dataset)"
 Write-Host "`nTo run the full pipeline, use:"
-Write-Host "  python main.py --all" 
+Write-Host "  python src/main.py --all" 

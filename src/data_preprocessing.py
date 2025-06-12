@@ -8,8 +8,7 @@ This script handles the preprocessing of real estate data for Squamish, BC.
 It cleans the dataset by removing irrelevant columns, handling missing values,
 and preparing the data for model training.
 
-Author: [Your Name]
-Date: [Current Date]
+Author: am-eskandari
 """
 
 import os
