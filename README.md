@@ -10,22 +10,67 @@ This project analyzes real estate data from Squamish, BC to predict property val
 
 The project follows a structured data science workflow:
 
-1. **Data Preprocessing**: 
-   - Cleaning and preparing the raw CSV data
-   - Handling missing values through imputation or removal
-   - Feature selection and engineering
-   - Removing irrelevant columns
+1. **Data Preprocessing** (`data_preprocessing.py`): 
+   - **Data Cleaning**:
+     - Removed irrelevant columns (photos, virtual tours, legal details)
+     - Handled missing values using median imputation for numeric data and mode imputation for categorical data
+     - Cleaned price columns by removing currency symbols and standardizing formats
+   - **Feature Engineering**:
+     - Selected key features based on correlation with target variable
+     - Focused on recent assessment values, land values, and property characteristics
+     - Removed features with high percentage (>10%) of missing values
+   - **Data Validation**:
+     - Ensured target variable ('2023 Assessed Total') has no missing values
+     - Verified data types and formats are consistent
+     - Removed duplicate entries if present
 
-2. **Model Development**:
-   - Automated machine learning with PyCaret
-   - Model comparison and selection
-   - Hyperparameter tuning
-   - Model evaluation using metrics like R², MAE, and RMSE
+2. **Model Development** (`model_training.py`):
+   - **Feature Selection**:
+     - Used PyCaret's built-in feature importance analysis
+     - Selected features with strongest correlation to target variable:
+       - Recent assessed values (2021-2023)
+       - Land and improvement values
+       - Property characteristics (bedrooms, bathrooms, etc.)
+   - **Model Selection**:
+     - Utilized PyCaret's automated ML workflow to compare multiple algorithms:
+       - Linear Regression
+       - Random Forest
+       - XGBoost
+       - LightGBM
+     - Selected best performing model based on R² score
+   - **Hyperparameter Tuning**:
+     - Performed automated hyperparameter optimization using PyCaret
+     - Used 5-fold cross-validation to prevent overfitting
+     - Optimized for R² metric
 
-3. **Prediction**:
-   - Making predictions on new properties
-   - Evaluating model performance on test data
-   - Single property prediction functionality
+3. **Prediction Pipeline** (`make_predictions.py`):
+   - **Model Deployment**:
+     - Saved trained model using PyCaret's save_model function
+     - Implemented model loading and prediction functions
+   - **Prediction Features**:
+     - Focused on key predictive features:
+       - 2023 Assessed Land
+       - 2022 Assessed Total
+       - 2023 Assessed Improvements
+       - Last Sold Date
+       - 2022 Assessed Land
+       - 2021 Assessed Total
+   - **Output Generation**:
+     - Created functions for both batch and single property predictions
+     - Included property identifiers (PID) in predictions
+     - Generated CSV output with predicted values
+
+4. **Pipeline Integration** (`main.py`):
+   - **Command Line Interface**:
+     - Implemented argparse for flexible command-line usage
+     - Added options for running full pipeline or individual steps
+   - **Environment Management**:
+     - Used python-dotenv for configuration
+     - Separated file paths and configurations into .env file
+   - **Error Handling**:
+     - Added robust error checking for file paths
+     - Included input validation for all parameters
+     - Provided clear error messages and logging
 
 ## Technologies Used
 
